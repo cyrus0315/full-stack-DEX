@@ -1,0 +1,500 @@
+/* Portfolio 页面主容器 */
+.portfolio-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: calc(100vh - 128px);
+}
+
+/* 页面头部 */
+.portfolio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  padding: 32px;
+  background: linear-gradient(135deg, rgba(135, 78, 242, 0.1) 0%, rgba(135, 78, 242, 0.05) 100%);
+  border: 2px solid rgba(135, 78, 242, 0.2);
+  border-radius: 24px;
+  transition: all 0.3s ease;
+  animation: slideIn 0.4s ease-out;
+}
+
+.portfolio-header:hover {
+  border-color: rgba(135, 78, 242, 0.4);
+  box-shadow: 0 8px 32px rgba(135, 78, 242, 0.2);
+}
+
+.portfolio-header h2 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #874ef2 0%, #d946ef 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 统计卡片容器 */
+.portfolio-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+/* 统计卡片 */
+.stat-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 28px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #874ef2, #d946ef);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(135, 78, 242, 0.3);
+  border-color: rgba(135, 78, 242, 0.4);
+}
+
+.stat-card:hover::before {
+  opacity: 1;
+}
+
+.stat-card-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+  opacity: 0.9;
+}
+
+.stat-card-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 8px;
+}
+
+.stat-card-value {
+  font-size: 28px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #874ef2 0%, #d946ef 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 资产卡片 */
+.assets-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 32px;
+  margin-bottom: 32px;
+  box-shadow: 0 8px 32px rgba(135, 78, 242, 0.1);
+  transition: all 0.3s ease;
+}
+
+.assets-card:hover {
+  border-color: rgba(135, 78, 242, 0.3);
+  box-shadow: 0 12px 48px rgba(135, 78, 242, 0.2);
+}
+
+.assets-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.assets-card-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 资产列表 */
+.assets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 资产项 */
+.asset-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.asset-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #874ef2, #d946ef);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.asset-item:hover {
+  border-color: rgba(135, 78, 242, 0.5);
+  background: rgba(135, 78, 242, 0.05);
+  transform: translateX(4px);
+}
+
+.asset-item:hover::before {
+  opacity: 1;
+}
+
+.asset-item-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.asset-item-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(135, 78, 242, 0.2), rgba(217, 70, 239, 0.2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(135, 78, 242, 0.3);
+  transition: all 0.3s;
+}
+
+.asset-item:hover .asset-item-avatar {
+  transform: rotate(360deg) scale(1.1);
+  box-shadow: 0 0 20px rgba(135, 78, 242, 0.5);
+}
+
+.asset-item-info h4 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.asset-item-info p {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.asset-item-right {
+  text-align: right;
+}
+
+.asset-balance {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: #fff;
+}
+
+.asset-value {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* 交易历史卡片 */
+.transactions-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 8px 32px rgba(135, 78, 242, 0.1);
+  transition: all 0.3s ease;
+}
+
+.transactions-card:hover {
+  border-color: rgba(135, 78, 242, 0.3);
+  box-shadow: 0 12px 48px rgba(135, 78, 242, 0.2);
+}
+
+.transactions-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.transactions-card-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 交易列表 */
+.transactions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 交易项 */
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.transaction-item:hover {
+  border-color: rgba(135, 78, 242, 0.5);
+  background: rgba(135, 78, 242, 0.05);
+  transform: translateX(4px);
+}
+
+.transaction-item-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.transaction-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: all 0.3s;
+}
+
+.transaction-icon.send {
+  background: rgba(255, 77, 79, 0.15);
+  border: 2px solid rgba(255, 77, 79, 0.3);
+  color: #ff4d4f;
+}
+
+.transaction-icon.receive {
+  background: rgba(82, 196, 26, 0.15);
+  border: 2px solid rgba(82, 196, 26, 0.3);
+  color: #52c41a;
+}
+
+.transaction-item:hover .transaction-icon {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px currentColor;
+}
+
+.transaction-info h4 {
+  margin: 0 0 6px 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.transaction-info p {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.transaction-item-right {
+  text-align: right;
+}
+
+.transaction-value {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.transaction-value.send {
+  color: #ff4d4f;
+}
+
+.transaction-value.receive {
+  color: #52c41a;
+}
+
+.transaction-time {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.empty-state-icon {
+  font-size: 100px;
+  opacity: 0.2;
+  margin-bottom: 24px;
+}
+
+.empty-state-text {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* 加载状态 */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 20px;
+}
+
+/* 按钮样式 */
+.portfolio-page .ant-btn-primary {
+  background: linear-gradient(135deg, #874ef2 0%, #d946ef 100%);
+  border: none;
+  height: 40px;
+  padding: 0 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.portfolio-page .ant-btn-primary:hover {
+  background: linear-gradient(135deg, #9d6bf7 0%, #e467f3 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(135, 78, 242, 0.4);
+}
+
+/* Tag 标签样式 */
+.ant-tag.status-success {
+  background: rgba(82, 196, 26, 0.15);
+  border-color: rgba(82, 196, 26, 0.3);
+  color: #52c41a;
+}
+
+.ant-tag.status-pending {
+  background: rgba(250, 173, 20, 0.15);
+  border-color: rgba(250, 173, 20, 0.3);
+  color: #faad14;
+}
+
+.ant-tag.status-failed {
+  background: rgba(255, 77, 79, 0.15);
+  border-color: rgba(255, 77, 79, 0.3);
+  color: #ff4d4f;
+}
+
+/* 动画 */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 渐变背景动画 */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .portfolio-page {
+    padding: 20px 16px;
+  }
+
+  .portfolio-header {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 24px;
+  }
+
+  .portfolio-header h2 {
+    font-size: 24px;
+  }
+
+  .portfolio-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .assets-card,
+  .transactions-card {
+    padding: 24px;
+    border-radius: 20px;
+  }
+
+  .asset-item,
+  .transaction-item {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .asset-item-right,
+  .transaction-item-right {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* Tooltip 样式 */
+.ant-tooltip-inner {
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+/* Spin 加载器颜色 */
+.ant-spin-dot-item {
+  background-color: #874ef2;
+}

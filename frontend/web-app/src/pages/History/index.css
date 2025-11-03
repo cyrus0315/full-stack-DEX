@@ -1,0 +1,25 @@
+.history-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.history-container .ant-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.history-container .ant-table {
+  margin-top: 16px;
+}
+
+.history-container .ant-table-thead > tr > th {
+  background-color: #fafafa;
+  font-weight: 600;
+}
+
+.history-container .ant-tag {
+  border-radius: 4px;
+  font-size: 12px;
+}
+

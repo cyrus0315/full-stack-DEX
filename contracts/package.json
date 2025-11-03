@@ -1,0 +1,29 @@
+{
+  "name": "@dex/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "coverage": "hardhat coverage",
+    "deploy:local": "hardhat run scripts/deploy-local.ts --network localhost",
+    "node": "hardhat node"
+  },
+  "devDependencies": {
+    "@chainlink/contracts": "^1.5.0",
+    "@nomicfoundation/hardhat-ethers": "^3.0.0",
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "@typechain/ethers-v6": "^0.5.0",
+    "@typechain/hardhat": "^9.1.0",
+    "@types/node": "^20.11.0",
+    "dotenv": "^16.4.0",
+    "ethers": "^6.11.0",
+    "hardhat": "^2.22.0",
+    "solc": "0.8.20",
+    "typechain": "^8.3.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.0"
+  }
+}

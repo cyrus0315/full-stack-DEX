@@ -1,0 +1,86 @@
+.farm-card {
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.farm-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+}
+
+.farm-card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.token-icons {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 64px;
+  height: 48px;
+}
+
+.token-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  border: 3px solid white;
+  position: absolute;
+  left: 0;
+}
+
+.token-icon-overlap {
+  left: 16px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.token-info {
+  flex: 1;
+}
+
+.farm-card-apr {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.farm-card-stats {
+  margin-bottom: 20px;
+}
+
+.farm-card-stats .ant-statistic-title {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+.farm-card-user {
+  padding: 16px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.farm-card-actions {
+  margin-top: 16px;
+}
+
+.farm-card-actions button {
+  height: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+

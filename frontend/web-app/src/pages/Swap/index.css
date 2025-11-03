@@ -1,0 +1,327 @@
+/* Swap 页面主容器 */
+.swap-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: calc(100vh - 128px);
+}
+
+/* 页面头部 */
+.swap-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(0, 185, 107, 0.1) 0%, rgba(0, 185, 107, 0.05) 100%);
+  border: 1px solid rgba(0, 185, 107, 0.2);
+  border-radius: 20px;
+}
+
+/* 升级版交换卡片 */
+.swap-card-upgraded {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 8px 32px rgba(0, 185, 107, 0.1);
+  transition: all 0.3s ease;
+}
+
+.swap-card-upgraded:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 48px rgba(0, 185, 107, 0.2);
+  border-color: rgba(0, 185, 107, 0.3);
+}
+
+/* 卡片头部 */
+.swap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.swap-header h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* 表单容器 */
+.swap-form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* 升级版代币输入面板 */
+.token-input-panel-upgraded {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.1) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.token-input-panel-upgraded::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 185, 107, 0.5), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.token-input-panel-upgraded:hover {
+  border-color: rgba(0, 185, 107, 0.5);
+  background: linear-gradient(135deg, rgba(0, 185, 107, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%);
+}
+
+.token-input-panel-upgraded:hover::before {
+  opacity: 1;
+}
+
+.token-input-panel-upgraded:focus-within {
+  border-color: rgba(0, 185, 107, 0.8);
+  box-shadow: 0 0 0 4px rgba(0, 185, 107, 0.1);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+/* 升级版内容区 */
+.panel-content-upgraded {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* 升级版金额输入 */
+.amount-input-upgraded {
+  flex: 1;
+  font-size: 28px;
+  font-weight: 600;
+  padding: 0;
+}
+
+.amount-input-upgraded input {
+  background: transparent !important;
+  color: inherit !important;
+  font-size: 28px !important;
+  font-weight: 600 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+.amount-input-upgraded input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* 升级版代币选择按钮 */
+.token-select-button-upgraded {
+  padding: 10px 16px !important;
+  height: auto !important;
+  background: rgba(0, 185, 107, 0.15) !important;
+  border: 1px solid rgba(0, 185, 107, 0.3) !important;
+  border-radius: 16px !important;
+  transition: all 0.3s ease !important;
+  min-width: 140px;
+}
+
+.token-select-button-upgraded:hover {
+  background: rgba(0, 185, 107, 0.25) !important;
+  border-color: rgba(0, 185, 107, 0.5) !important;
+  transform: scale(1.02);
+}
+
+.token-select-button-upgraded:active {
+  transform: scale(0.98);
+}
+
+.panel-footer {
+  margin-top: 8px;
+  text-align: right;
+}
+
+/* 升级版交换图标容器 */
+.swap-icon-wrapper-upgraded {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 40px;
+  margin: -8px 0;
+  z-index: 2;
+}
+
+/* 升级版交换图标按钮 */
+.swap-icon-button-upgraded {
+  width: 48px !important;
+  height: 48px !important;
+  background: linear-gradient(135deg, rgba(0, 185, 107, 0.3) 0%, rgba(0, 185, 107, 0.2) 100%) !important;
+  border: 4px solid rgba(26, 26, 46, 1) !important;
+  color: #00b96b !important;
+  font-size: 20px !important;
+  box-shadow: 0 4px 12px rgba(0, 185, 107, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.swap-icon-button-upgraded:hover {
+  background: linear-gradient(135deg, rgba(0, 185, 107, 0.5) 0%, rgba(0, 185, 107, 0.3) 100%) !important;
+  transform: rotate(180deg) scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 185, 107, 0.5) !important;
+}
+
+.swap-icon-button-upgraded:active {
+  transform: rotate(180deg) scale(0.95);
+}
+
+/* 升级版交易信息 */
+.trade-info-upgraded {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 🚀 Phase 4: 增强信息显示区域 */
+.enhanced-info {
+  margin-top: 16px;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(24, 144, 255, 0.08) 0%, rgba(24, 144, 255, 0.04) 100%);
+  border: 1px solid rgba(24, 144, 255, 0.2);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.enhanced-info:hover {
+  border-color: rgba(24, 144, 255, 0.4);
+  background: linear-gradient(135deg, rgba(24, 144, 255, 0.12) 0%, rgba(24, 144, 255, 0.06) 100%);
+}
+
+.enhanced-info .info-row {
+  padding: 4px 0;
+}
+
+/* 按钮样式增强 */
+.swap-card-upgraded .ant-btn-primary {
+  background: linear-gradient(135deg, #00b96b 0%, #00a860 100%);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.swap-card-upgraded .ant-btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #00d17a 0%, #00b96b 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 185, 107, 0.4);
+}
+
+.swap-card-upgraded .ant-btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.swap-card-upgraded .ant-btn-primary:disabled {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* 加载动画 */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.ant-spin {
+  color: #00b96b;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .swap-page {
+    padding: 20px 16px;
+  }
+
+  .swap-page-header {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .swap-card-upgraded {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .amount-input-upgraded {
+    font-size: 24px;
+  }
+
+  .amount-input-upgraded input {
+    font-size: 24px !important;
+  }
+
+  .token-select-button-upgraded {
+    min-width: 120px;
+  }
+
+  .panel-content-upgraded {
+    gap: 12px;
+  }
+}
+
+/* 动画效果 */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.swap-card-upgraded {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Badge 状态颜色 */
+.ant-badge-status-success .ant-badge-status-dot {
+  background-color: #52c41a;
+}
+
+.ant-badge-status-warning .ant-badge-status-dot {
+  background-color: #faad14;
+}
+
+.ant-badge-status-error .ant-badge-status-dot {
+  background-color: #ff4d4f;
+}

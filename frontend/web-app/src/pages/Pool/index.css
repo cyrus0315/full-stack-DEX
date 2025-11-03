@@ -1,0 +1,451 @@
+/* Pool 页面主容器 */
+.pool-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: calc(100vh - 128px);
+}
+
+/* 页面头部 */
+.pool-header {
+  margin-bottom: 40px;
+  padding: 32px;
+  background: linear-gradient(135deg, rgba(82, 196, 26, 0.1) 0%, rgba(24, 144, 255, 0.1) 100%);
+  border: 2px solid rgba(82, 196, 26, 0.2);
+  border-radius: 24px;
+  transition: all 0.3s ease;
+  animation: slideIn 0.4s ease-out;
+}
+
+.pool-header:hover {
+  border-color: rgba(82, 196, 26, 0.4);
+  box-shadow: 0 8px 32px rgba(82, 196, 26, 0.2);
+}
+
+.pool-header h3 {
+  margin: 0 0 12px 0;
+  font-size: 32px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #52c41a 0%, #1890ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Pool 介绍区域 */
+.pool-intro {
+  background: rgba(0, 0, 0, 0.2);
+  border-left: 4px solid #52c41a;
+  padding: 24px;
+  margin-bottom: 32px;
+  border-radius: 16px;
+}
+
+.pool-intro h4 {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #52c41a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pool-intro p {
+  margin: 0 0 12px 0;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.pool-intro ul {
+  margin: 12px 0;
+  padding-left: 24px;
+}
+
+.pool-intro li {
+  margin: 8px 0;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Pool 统计卡片 */
+.pool-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.pool-stat-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 28px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pool-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #52c41a, #1890ff);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.pool-stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(82, 196, 26, 0.3);
+  border-color: rgba(82, 196, 26, 0.4);
+}
+
+.pool-stat-card:hover::before {
+  opacity: 1;
+}
+
+.pool-stat-icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+  opacity: 0.9;
+}
+
+.pool-stat-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.pool-stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #52c41a 0%, #1890ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Pool 列表卡片 */
+.pool-list-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 8px 32px rgba(82, 196, 26, 0.1);
+  transition: all 0.3s ease;
+}
+
+.pool-list-card:hover {
+  border-color: rgba(82, 196, 26, 0.3);
+  box-shadow: 0 12px 48px rgba(82, 196, 26, 0.2);
+}
+
+.pool-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.pool-list-header h4 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Pool 列表 */
+.pool-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Pool 项 */
+.pool-item {
+  background: rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 28px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pool-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #52c41a, #1890ff);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.pool-item:hover {
+  border-color: rgba(82, 196, 26, 0.5);
+  background: rgba(82, 196, 26, 0.05);
+  transform: translateX(6px);
+  box-shadow: 0 8px 32px rgba(82, 196, 26, 0.2);
+}
+
+.pool-item:hover::before {
+  opacity: 1;
+}
+
+/* Pool 项头部 */
+.pool-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pool-tokens {
+  flex: 1;
+}
+
+.pool-tokens .ant-avatar-group {
+  margin-right: 16px;
+}
+
+.pool-tokens .ant-avatar {
+  border: 3px solid rgba(26, 26, 46, 1);
+  box-shadow: 0 4px 12px rgba(82, 196, 26, 0.2);
+  transition: all 0.3s;
+}
+
+.pool-item:hover .pool-tokens .ant-avatar {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(82, 196, 26, 0.4);
+}
+
+/* Pool 项详情 */
+.pool-item-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+.pool-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  transition: all 0.3s;
+}
+
+.pool-detail-item:hover {
+  background: rgba(82, 196, 26, 0.1);
+  transform: translateY(-2px);
+}
+
+/* 空状态 */
+.pool-empty-state {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.pool-empty-icon {
+  font-size: 100px;
+  opacity: 0.2;
+  margin-bottom: 32px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.pool-empty-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.pool-empty-description {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 32px;
+  line-height: 1.8;
+}
+
+/* 按钮样式 */
+.pool-page .ant-btn-primary {
+  background: linear-gradient(135deg, #52c41a 0%, #1890ff 100%);
+  border: none;
+  height: 44px;
+  padding: 0 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.pool-page .ant-btn-primary:hover {
+  background: linear-gradient(135deg, #73d13d 0%, #40a9ff 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(82, 196, 26, 0.4);
+}
+
+.pool-page .ant-btn-primary:active {
+  transform: translateY(0);
+}
+
+.pool-page .ant-btn-default {
+  border: 2px solid rgba(82, 196, 26, 0.3);
+  background: rgba(82, 196, 26, 0.1);
+  color: #52c41a;
+  height: 44px;
+  padding: 0 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.pool-page .ant-btn-default:hover {
+  border-color: rgba(82, 196, 26, 0.6);
+  background: rgba(82, 196, 26, 0.2);
+  color: #73d13d;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(82, 196, 26, 0.3);
+}
+
+/* 加载状态 */
+.pool-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 20px;
+}
+
+.ant-spin-dot-item {
+  background-color: #52c41a;
+}
+
+/* 动画 */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(82, 196, 26, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 20px rgba(82, 196, 26, 0);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .pool-page {
+    padding: 20px 16px;
+  }
+
+  .pool-header {
+    padding: 24px;
+  }
+
+  .pool-header h3 {
+    font-size: 24px;
+  }
+
+  .pool-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .pool-list-card {
+    padding: 24px;
+  }
+
+  .pool-item {
+    padding: 20px;
+  }
+
+  .pool-item-header {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .pool-item-details {
+    grid-template-columns: 1fr;
+  }
+
+  .pool-intro {
+    padding: 20px;
+  }
+}
+
+/* 渐变文字效果 */
+.gradient-text {
+  background: linear-gradient(135deg, #52c41a 0%, #1890ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Badge 状态 */
+.ant-badge-status-success .ant-badge-status-dot {
+  background-color: #52c41a;
+  box-shadow: 0 0 10px rgba(82, 196, 26, 0.5);
+}
+
+/* 高亮效果 */
+.highlight {
+  color: #52c41a;
+  font-weight: 600;
+}
+
+/* Divider 样式 */
+.ant-divider {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 卡片进入动画 */
+.pool-item {
+  animation: slideIn 0.3s ease-out;
+}
+
+.pool-item:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.pool-item:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.pool-item:nth-child(4) {
+  animation-delay: 0.3s;
+}

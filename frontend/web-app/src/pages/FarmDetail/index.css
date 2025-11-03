@@ -1,0 +1,135 @@
+.farm-detail-page {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.farm-detail-loading,
+.farm-detail-error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  padding: 40px;
+}
+
+.back-button {
+  margin-bottom: 24px;
+}
+
+.farm-detail-header {
+  margin-bottom: 24px;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.token-icons-large {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 96px;
+  height: 72px;
+}
+
+.token-icon-large {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  border: 4px solid white;
+  position: absolute;
+  left: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.token-icon-large.token-icon-overlap {
+  left: 24px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.info-card {
+  margin-bottom: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.info-card .ant-card-head {
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.info-card ol {
+  margin-left: 20px;
+  line-height: 2;
+}
+
+.info-card ol li {
+  margin-bottom: 12px;
+}
+
+.action-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 24px;
+}
+
+.action-card .ant-tabs {
+  margin: -24px -24px 0;
+}
+
+.action-card .ant-tabs-nav {
+  padding: 0 24px;
+}
+
+.action-card .ant-tabs-content {
+  padding: 24px;
+}
+
+.action-card .ant-input {
+  margin: 8px 0;
+}
+
+.action-card .ant-btn-primary {
+  height: 48px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.action-card .ant-btn-danger {
+  margin-top: 16px;
+}
+
+@media (max-width: 992px) {
+  .farm-detail-page {
+    padding: 16px;
+  }
+
+  .action-card {
+    position: static;
+  }
+
+  .token-icons-large {
+    width: 72px;
+    height: 54px;
+  }
+
+  .token-icon-large {
+    width: 54px;
+    height: 54px;
+    font-size: 24px;
+    border: 3px solid white;
+  }
+
+  .token-icon-large.token-icon-overlap {
+    left: 18px;
+  }
+}
+

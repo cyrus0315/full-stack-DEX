@@ -1,0 +1,501 @@
+/* ============================================
+   全局样式 - DEX 炫酷主题
+   ============================================ */
+
+/* 应用容器 */
+.app-container {
+  min-height: 100vh;
+  background: 
+    linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 15s ease infinite;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* 动态背景渐变动画 */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 背景粒子效果 */
+.app-container::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(82, 196, 26, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(24, 144, 255, 0.2) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+  animation: particleMove 20s ease-in-out infinite;
+}
+
+@keyframes particleMove {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+/* 内容容器 */
+.app-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   全局滚动条样式
+   ============================================ */
+
+/* Webkit 浏览器 (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #00b96b 0%, #1890ff 100%);
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #00d17a 0%, #40a9ff 100%);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #00b96b rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   全局文字选择样式
+   ============================================ */
+
+::selection {
+  background: rgba(0, 185, 107, 0.3);
+  color: #fff;
+}
+
+::-moz-selection {
+  background: rgba(0, 185, 107, 0.3);
+  color: #fff;
+}
+
+/* ============================================
+   Ant Design 组件样式覆盖
+   ============================================ */
+
+/* Card 卡片 */
+.ant-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  transition: all 0.3s ease;
+}
+
+.ant-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 185, 107, 0.15);
+}
+
+/* Button 按钮 */
+.ant-btn {
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.ant-btn-primary {
+  background: linear-gradient(135deg, #00b96b 0%, #1890ff 100%);
+  border: none;
+  box-shadow: 0 4px 16px rgba(0, 185, 107, 0.2);
+}
+
+.ant-btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #00d17a 0%, #40a9ff 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0, 185, 107, 0.4);
+}
+
+.ant-btn-default {
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.ant-btn-default:hover:not(:disabled) {
+  border-color: rgba(0, 185, 107, 0.5);
+  background: rgba(0, 185, 107, 0.1);
+  color: #00b96b;
+}
+
+/* Input 输入框 */
+.ant-input,
+.ant-input-number {
+  background: rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.85);
+  transition: all 0.3s;
+}
+
+.ant-input:hover,
+.ant-input-number:hover {
+  border-color: rgba(0, 185, 107, 0.3);
+}
+
+.ant-input:focus,
+.ant-input-number:focus,
+.ant-input-focused,
+.ant-input-number-focused {
+  border-color: #00b96b;
+  box-shadow: 0 0 0 4px rgba(0, 185, 107, 0.1);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.ant-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Modal 弹窗 */
+.ant-modal-content {
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.98) 0%, rgba(22, 33, 62, 0.98) 100%);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.ant-modal-header {
+  background: transparent;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px 24px 0 0;
+}
+
+.ant-modal-title {
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 600;
+}
+
+.ant-modal-close-x {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.ant-modal-close-x:hover {
+  color: #00b96b;
+}
+
+/* Tabs 标签页 */
+.ant-tabs-tab {
+  color: rgba(255, 255, 255, 0.65);
+  transition: all 0.3s;
+}
+
+.ant-tabs-tab:hover {
+  color: #00b96b;
+}
+
+.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #00b96b !important;
+  font-weight: 600;
+}
+
+.ant-tabs-ink-bar {
+  background: linear-gradient(90deg, #00b96b 0%, #1890ff 100%);
+  height: 3px;
+  border-radius: 3px;
+}
+
+/* Select 下拉框 */
+.ant-select-selector {
+  background: rgba(0, 0, 0, 0.2) !important;
+  border: 2px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+  transition: all 0.3s !important;
+}
+
+.ant-select-selector:hover {
+  border-color: rgba(0, 185, 107, 0.3) !important;
+}
+
+.ant-select-focused .ant-select-selector {
+  border-color: #00b96b !important;
+  box-shadow: 0 0 0 4px rgba(0, 185, 107, 0.1) !important;
+}
+
+/* Dropdown 下拉菜单 */
+.ant-dropdown-menu {
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.98) 0%, rgba(22, 33, 62, 0.98) 100%);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.ant-dropdown-menu-item {
+  color: rgba(255, 255, 255, 0.85);
+  transition: all 0.3s;
+}
+
+.ant-dropdown-menu-item:hover {
+  background: rgba(0, 185, 107, 0.1);
+  color: #00b96b;
+}
+
+/* Message 消息提示 */
+.ant-message-notice-content {
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.98) 0%, rgba(22, 33, 62, 0.98) 100%);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  padding: 16px 24px;
+}
+
+/* Spin 加载器 */
+.ant-spin-dot-item {
+  background-color: #00b96b;
+}
+
+/* Avatar 头像 */
+.ant-avatar {
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s;
+}
+
+.ant-avatar:hover {
+  border-color: #00b96b;
+  box-shadow: 0 0 20px rgba(0, 185, 107, 0.5);
+}
+
+/* Badge 徽章 */
+.ant-badge-status-dot {
+  width: 10px;
+  height: 10px;
+}
+
+.ant-badge-status-success {
+  background: #52c41a;
+  box-shadow: 0 0 10px rgba(82, 196, 26, 0.5);
+}
+
+.ant-badge-status-warning {
+  background: #faad14;
+  box-shadow: 0 0 10px rgba(250, 173, 20, 0.5);
+}
+
+.ant-badge-status-error {
+  background: #ff4d4f;
+  box-shadow: 0 0 10px rgba(255, 77, 79, 0.5);
+}
+
+/* Tag 标签 */
+.ant-tag {
+  border-radius: 8px;
+  padding: 4px 12px;
+  font-weight: 500;
+  border-width: 1px;
+}
+
+/* Tooltip 提示框 */
+.ant-tooltip-inner {
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.ant-tooltip-arrow-content {
+  background: rgba(0, 0, 0, 0.95);
+}
+
+/* Empty 空状态 */
+.ant-empty-description {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* ============================================
+   响应式布局
+   ============================================ */
+
+@media (max-width: 768px) {
+  .app-container {
+    background-size: 400% 400%;
+  }
+}
+
+/* ============================================
+   通用动画类
+   ============================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.slide-in-up {
+  animation: slideInUp 0.4s ease-out;
+}
+
+.slide-in-down {
+  animation: slideInDown 0.4s ease-out;
+}
+
+.scale-in {
+  animation: scaleIn 0.3s ease-out;
+}
+
+/* ============================================
+   工具类
+   ============================================ */
+
+/* 玻璃形态 */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 渐变文字 */
+.gradient-text {
+  background: linear-gradient(135deg, #00b96b 0%, #1890ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-purple {
+  background: linear-gradient(135deg, #874ef2 0%, #d946ef 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 发光效果 */
+.glow {
+  box-shadow: 0 0 20px rgba(0, 185, 107, 0.5);
+}
+
+.glow-hover {
+  transition: all 0.3s;
+}
+
+.glow-hover:hover {
+  box-shadow: 0 0 30px rgba(0, 185, 107, 0.7);
+  transform: translateY(-2px);
+}
+
+/* 脉冲动画 */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* 旋转动画 */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate {
+  animation: rotate 2s linear infinite;
+}
+
+/* ============================================
+   性能优化
+   ============================================ */
+
+/* GPU 加速 */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* 平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 减少重绘 */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

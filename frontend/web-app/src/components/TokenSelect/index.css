@@ -1,0 +1,214 @@
+/* Token Select Modal */
+.token-select-modal .ant-modal-content {
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.98) 0%, rgba(22, 33, 62, 0.98) 100%);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+}
+
+.token-select-modal .ant-modal-header {
+  background: transparent;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  padding: 20px 24px;
+}
+
+.token-select-modal .ant-modal-title {
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.token-select-modal .ant-modal-body {
+  padding: 24px;
+}
+
+/* Content Container */
+.token-select-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Search Input */
+.token-search-input {
+  margin-bottom: 8px;
+  height: 48px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.3) !important;
+  border: 2px solid rgba(255, 255, 255, 0.1) !important;
+  transition: all 0.3s;
+}
+
+.token-search-input:hover {
+  border-color: rgba(0, 185, 107, 0.3) !important;
+}
+
+.token-search-input:focus,
+.token-search-input.ant-input-focused {
+  border-color: #00b96b !important;
+  box-shadow: 0 0 0 4px rgba(0, 185, 107, 0.1) !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+}
+
+.token-search-input input {
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 15px;
+}
+
+.token-search-input input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Token List */
+.token-list {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Scrollbar for Token List */
+.token-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.token-list::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.token-list::-webkit-scrollbar-thumb {
+  background: rgba(0, 185, 107, 0.5);
+  border-radius: 10px;
+}
+
+.token-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 185, 107, 0.7);
+}
+
+/* Token List Item */
+.token-list-item {
+  padding: 14px 16px !important;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.2);
+  margin-bottom: 8px;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.token-list-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #00b96b, #1890ff);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.token-list-item:hover {
+  background: rgba(0, 185, 107, 0.05);
+  border-color: rgba(0, 185, 107, 0.3);
+  transform: translateX(4px);
+}
+
+.token-list-item:hover::before {
+  opacity: 0.5;
+}
+
+/* Selected Token */
+.token-list-item.selected {
+  background: linear-gradient(135deg, rgba(0, 185, 107, 0.2) 0%, rgba(0, 185, 107, 0.15) 100%);
+  border: 2px solid rgba(0, 185, 107, 0.6);
+  box-shadow: 0 4px 16px rgba(0, 185, 107, 0.2);
+}
+
+.token-list-item.selected::before {
+  opacity: 1;
+}
+
+.token-list-item.selected:hover {
+  background: linear-gradient(135deg, rgba(255, 77, 79, 0.15) 0%, rgba(255, 77, 79, 0.1) 100%);
+  border-color: rgba(255, 77, 79, 0.5);
+  box-shadow: 0 4px 16px rgba(255, 77, 79, 0.2);
+}
+
+.token-list-item.selected:hover::before {
+  background: #ff4d4f;
+  opacity: 1;
+}
+
+/* Token Avatar */
+.token-list-item .ant-avatar {
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s;
+}
+
+.token-list-item:hover .ant-avatar {
+  border-color: #00b96b;
+  box-shadow: 0 0 12px rgba(0, 185, 107, 0.4);
+  transform: scale(1.05);
+}
+
+.token-list-item.selected .ant-avatar {
+  border-color: #00b96b;
+  box-shadow: 0 0 16px rgba(0, 185, 107, 0.5);
+}
+
+.token-list-item.selected:hover .ant-avatar {
+  border-color: #ff4d4f;
+  box-shadow: 0 0 16px rgba(255, 77, 79, 0.5);
+}
+
+/* Empty State */
+.token-list .ant-list-empty-text {
+  padding: 40px 20px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* Clear Button */
+.token-select-modal .ant-btn-text {
+  color: rgba(255, 255, 255, 0.65);
+  transition: all 0.3s;
+}
+
+.token-select-modal .ant-btn-text:hover {
+  color: #ff4d4f;
+  background: rgba(255, 77, 79, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .token-select-modal {
+    max-width: calc(100vw - 32px) !important;
+  }
+
+  .token-list {
+    max-height: 300px;
+  }
+
+  .token-search-input {
+    height: 44px;
+  }
+}
+
+/* Animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.token-list-item {
+  animation: slideIn 0.2s ease-out;
+}
