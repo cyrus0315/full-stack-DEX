@@ -1,0 +1,10 @@
+.slippage-button {
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.slippage-button:hover {
+  border-color: #1890ff;
+  color: #1890ff;
+}
+

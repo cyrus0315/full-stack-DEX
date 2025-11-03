@@ -1,0 +1,72 @@
+.farms-page {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.farms-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.farms-header {
+  margin-bottom: 32px;
+}
+
+.farms-header h2 {
+  margin-bottom: 8px;
+}
+
+.farms-summary {
+  margin-bottom: 24px;
+}
+
+.farms-summary .ant-card {
+  border-radius: 12px;
+}
+
+.farms-controls {
+  margin-bottom: 24px;
+  border-radius: 12px;
+}
+
+.farms-grid {
+  margin-bottom: 32px;
+}
+
+.farms-info {
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+}
+
+.farms-info h4 {
+  margin-bottom: 16px;
+}
+
+.farms-info ol {
+  margin-left: 20px;
+  line-height: 2;
+}
+
+.farms-info ol li {
+  margin-bottom: 8px;
+}
+
+.farms-info a {
+  color: #1890ff;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .farms-page {
+    padding: 16px;
+  }
+
+  .farms-controls .ant-space {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+

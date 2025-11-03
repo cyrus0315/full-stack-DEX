@@ -1,0 +1,103 @@
+.confirm-swap-modal .swap-summary {
+  background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+  padding: 28px;
+  border-radius: 16px;
+  color: white;
+  box-shadow: 0 8px 24px rgba(24, 144, 255, 0.3);
+}
+
+.confirm-swap-modal .token-amount {
+  text-align: center;
+}
+
+.confirm-swap-modal .token-amount .ant-typography {
+  color: white !important;
+}
+
+.confirm-swap-modal .swap-details {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.confirm-swap-modal .detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+/* 确保在深色模式下文字清晰可见 */
+.confirm-swap-modal .detail-row .ant-typography,
+.confirm-swap-modal .detail-row span {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.confirm-swap-modal .detail-row .ant-typography-secondary {
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+
+/* Statistic 组件样式优化 */
+.confirm-swap-modal .ant-statistic-title {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.confirm-swap-modal .ant-statistic-content {
+  color: white;
+  font-weight: 600;
+}
+
+/* 分隔线优化 */
+.confirm-swap-modal .ant-divider {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Modal 背景优化 */
+.confirm-swap-modal .ant-modal-content {
+  background: linear-gradient(180deg, rgba(20, 20, 30, 0.95) 0%, rgba(10, 10, 20, 0.98) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+}
+
+.confirm-swap-modal .ant-modal-header {
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.confirm-swap-modal .ant-modal-title {
+  color: white;
+}
+
+.confirm-swap-modal .ant-modal-close-x {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.confirm-swap-modal .ant-modal-close-x:hover {
+  color: white;
+}
+
+/* Alert 警告样式优化 */
+.confirm-swap-modal .ant-alert {
+  background: rgba(250, 173, 20, 0.15);
+  border: 1px solid rgba(250, 173, 20, 0.3);
+}
+
+.confirm-swap-modal .ant-alert-warning {
+  background: rgba(250, 173, 20, 0.15);
+  border-color: rgba(250, 173, 20, 0.3);
+}
+
+.confirm-swap-modal .ant-alert-error {
+  background: rgba(255, 77, 79, 0.15);
+  border-color: rgba(255, 77, 79, 0.3);
+}
+
+.confirm-swap-modal .ant-alert-message {
+  color: rgba(255, 255, 255, 0.85);
+}
+
