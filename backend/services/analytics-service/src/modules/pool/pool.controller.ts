@@ -12,6 +12,7 @@ import {
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { PoolService } from './pool.service';
+import { PoolUsdService } from './pool-usd.service';
 import {
   CreatePoolDto,
   PoolListQueryDto,
@@ -29,7 +30,10 @@ import {
 export class PoolController {
   private readonly logger = new Logger(PoolController.name);
 
-  constructor(private readonly poolService: PoolService) {}
+  constructor(
+    private readonly poolService: PoolService,
+    private readonly poolUsdService: PoolUsdService,
+  ) {}
 
   /**
    * 获取或创建池子
@@ -53,7 +57,10 @@ export class PoolController {
   @ApiResponse({ status: 200, description: '成功', type: PoolListResponseDto })
   async getPoolList(@Query() query: PoolListQueryDto): Promise<PoolListResponseDto> {
     this.logger.log(`Get pool list: page=${query.page}, limit=${query.limit}`);
-    return await this.poolService.getPoolList(query);
+    const result = await this.poolService.getPoolList(query);
+    // 为所有池子添加 USD 价格信息
+    result.pools = await this.poolUsdService.enrichPoolsWithUsdPrices(result.pools);
+    return result;
   }
 
   /**
@@ -77,7 +84,9 @@ export class PoolController {
   @ApiResponse({ status: 404, description: '池子不存在' })
   async getPoolById(@Param('id', ParseIntPipe) id: number): Promise<PoolInfoDto> {
     this.logger.log(`Get pool by ID: ${id}`);
-    return await this.poolService.getPoolById(id);
+    const pool = await this.poolService.getPoolById(id);
+    // 添加 USD 价格信息
+    return this.poolUsdService.enrichPoolWithUsdPrices(pool);
   }
 
   /**

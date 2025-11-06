@@ -54,7 +54,7 @@ import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
  * 交易后：(x + Δx) * (y - Δy) = k
  * 
  * 解出 Δy：
- * Δy = y * Δx / (x + Δx)
+ * Δy = y * k / (x + Δx)
  * ```
  * 
  * **为什么这个公式有效？**

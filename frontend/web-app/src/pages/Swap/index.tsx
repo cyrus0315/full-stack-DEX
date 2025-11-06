@@ -25,9 +25,11 @@ import { parseUnits, formatUnits, parseAbi, Address } from 'viem'
 import { usePublicClient } from 'wagmi'
 import { useWallet } from '../../hooks/useWallet'
 import { useSwap } from '../../hooks/useSwap'
+import { useTokenValue } from '../../hooks/usePriceOracle'
 import TokenSelect from '../../components/TokenSelect'
 import SlippageSettings from '../../components/SlippageSettings'
 import ConfirmSwapModal from '../../components/ConfirmSwapModal'
+import { TokenValueDisplay } from '../../components/PriceDisplay'
 import { Token } from '../../types'
 import { DEFAULT_TOKENS } from '../../config/tokens'
 import { apiService } from '../../services/api'
@@ -454,11 +456,19 @@ const SwapPage: React.FC = () => {
                 )}
               </Button>
             </div>
-            {amountIn && (
-              <div className="panel-footer">
-                <Text type="secondary" style={{ fontSize: 12 }}>
-                  ≈ $--
-                </Text>
+            {tokenIn && amountIn && parseFloat(amountIn) > 0 && (
+              <div style={{ 
+                paddingLeft: '20px',
+                marginTop: '8px',
+                fontSize: '13px',
+                color: '#8c8c8c'
+              }}>
+                ≈ <TokenValueDisplay 
+                  tokenAddress={tokenIn.address}
+                  amount={amountIn}
+                  size="small"
+                  showIcon={false}
+                />
               </div>
             )}
           </div>
@@ -497,7 +507,7 @@ const SwapPage: React.FC = () => {
                   className="amount-input-upgraded"
                 />
                 {quoteLoading && (
-                  <div style={{ position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)' }}>
+                  <div style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)' }}>
                     <Spin size="small" />
                   </div>
                 )}
@@ -526,11 +536,19 @@ const SwapPage: React.FC = () => {
                 )}
               </Button>
             </div>
-            {amountOut && (
-              <div className="panel-footer">
-                <Text type="secondary" style={{ fontSize: 12 }}>
-                  ≈ $--
-                </Text>
+            {tokenOut && amountOut && parseFloat(amountOut) > 0 && !quoteLoading && (
+              <div style={{ 
+                paddingLeft: '20px',
+                marginTop: '8px',
+                fontSize: '13px',
+                color: '#8c8c8c'
+              }}>
+                ≈ <TokenValueDisplay 
+                  tokenAddress={tokenOut.address}
+                  amount={amountOut}
+                  size="small"
+                  showIcon={false}
+                />
               </div>
             )}
           </div>

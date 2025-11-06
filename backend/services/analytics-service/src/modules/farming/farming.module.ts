@@ -9,6 +9,7 @@ import { Farm } from './entities/farm.entity';
 import { UserFarm } from './entities/user-farm.entity';
 import { BlockchainModule } from '../../providers/blockchain/blockchain.module';
 import { BlockchainListenerModule } from '../blockchain-listener/blockchain-listener.module';
+import { PriceModule } from '../price/price.module';
 
 /**
  * FarmingModule
@@ -21,6 +22,7 @@ import { BlockchainListenerModule } from '../blockchain-listener/blockchain-list
     TypeOrmModule.forFeature([Farm, UserFarm]),
     BlockchainModule, // 需要 BlockchainProvider
     forwardRef(() => BlockchainListenerModule), // 需要 EventsGateway（避免循环依赖）
+    forwardRef(() => PriceModule), // 引入价格模块
   ],
   controllers: [FarmingController],
   providers: [FarmingService, FarmingListenerService, FarmingSchedulerService],

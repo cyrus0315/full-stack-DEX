@@ -26,6 +26,8 @@ lerna-debug.log*
 # 保留示例配置文件
 !.env.example
 !.env.template
+!.env.deployed
+!contracts/.env.deployed
 
 # ============================================
 # 编译输出

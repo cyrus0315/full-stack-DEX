@@ -85,21 +85,34 @@ async function main() {
   
   console.log('📖 读取代币地址...')
   
-  const deployedAddressesPath = path.join(
-    __dirname,
-    '../deployed-addresses.json'
-  )
+  const envDeployedPath = path.join(__dirname, '../.env.deployed')
   
-  if (!fs.existsSync(deployedAddressesPath)) {
+  if (!fs.existsSync(envDeployedPath)) {
     throw new Error(
-      '❌ 找不到 deployed-addresses.json\n' +
+      '❌ 找不到 .env.deployed\n' +
       '   请先运行 deploy.ts 部署核心合约'
     )
   }
   
-  const deployedAddresses = JSON.parse(
-    fs.readFileSync(deployedAddressesPath, 'utf8')
-  )
+  // 解析 .env.deployed 文件
+  const envContent = fs.readFileSync(envDeployedPath, 'utf8')
+  const envLines = envContent.split('\n')
+  const deployedAddresses: { [key: string]: string } = {}
+  
+  for (const line of envLines) {
+    if (line.includes('=') && !line.trim().startsWith('#')) {
+      const [key, value] = line.split('=')
+      const cleanKey = key.trim()
+      const cleanValue = value.trim()
+      
+      if (cleanKey === 'WETH_ADDRESS') deployedAddresses.WETH = cleanValue
+      if (cleanKey === 'USDT_ADDRESS') deployedAddresses.USDT = cleanValue
+      if (cleanKey === 'DAI_ADDRESS') deployedAddresses.DAI = cleanValue
+      if (cleanKey === 'USDC_ADDRESS') deployedAddresses.USDC = cleanValue
+      if (cleanKey === 'FACTORY_ADDRESS') deployedAddresses.Factory = cleanValue
+      if (cleanKey === 'ROUTER_ADDRESS') deployedAddresses.Router = cleanValue
+    }
+  }
   
   console.log('✅ 已读取代币地址\n')
 
@@ -276,13 +289,26 @@ async function main() {
   // 9. 保存部署地址
   // ============================================
   
-  console.log('💾 保存合约地址...')
+  console.log('💾 保存合约地址...\n')
   
-  // 更新现有的 deployed-addresses.json
+  // 9.1 更新 deployed-addresses.json
+  const deployedAddressesPath = path.join(
+    __dirname,
+    '../deployed-addresses.json'
+  )
+  
+  let existingData = {}
+  if (fs.existsSync(deployedAddressesPath)) {
+    existingData = JSON.parse(fs.readFileSync(deployedAddressesPath, 'utf8'))
+  }
+  
   const updatedAddresses = {
-    ...deployedAddresses,
-    PriceOracle: oracleAddress,
-    Aggregators: aggregators,
+    ...existingData,
+    oracle: {
+      priceOracle: oracleAddress,
+      aggregators: aggregators,
+      deployedAt: new Date().toISOString(),
+    }
   }
   
   fs.writeFileSync(
@@ -292,7 +318,7 @@ async function main() {
   
   console.log('✅ 地址已保存到:', deployedAddressesPath)
 
-  // 同时创建单独的 Oracle 地址文件（方便后端使用）
+  // 9.2 创建 Oracle 详细信息文件
   const oracleAddressesPath = path.join(
     __dirname,
     '../deployed-oracle-addresses.json'
@@ -336,6 +362,76 @@ async function main() {
   )
   
   console.log('✅ Oracle 详细信息已保存到:', oracleAddressesPath)
+
+  // 9.3 更新 contracts/.env.deployed
+  const contractsEnvDeployedPath = path.join(__dirname, '../.env.deployed')
+  let contractsEnvContent = ''
+  
+  if (fs.existsSync(contractsEnvDeployedPath)) {
+    contractsEnvContent = fs.readFileSync(contractsEnvDeployedPath, 'utf8')
+  }
+  
+  // 添加或更新 PRICE_ORACLE_ADDRESS
+  if (contractsEnvContent.includes('PRICE_ORACLE_ADDRESS=')) {
+    contractsEnvContent = contractsEnvContent.replace(
+      /PRICE_ORACLE_ADDRESS=.*/g,
+      `PRICE_ORACLE_ADDRESS=${oracleAddress}`
+    )
+  } else {
+    contractsEnvContent += `\n# Price Oracle\nPRICE_ORACLE_ADDRESS=${oracleAddress}\n`
+  }
+  
+  fs.writeFileSync(contractsEnvDeployedPath, contractsEnvContent)
+  console.log('✅ 已更新:', contractsEnvDeployedPath)
+
+  // 9.4 更新前端 .env
+  const frontendEnvPath = path.join(
+    __dirname,
+    '../../frontend/web-app/.env'
+  )
+  
+  if (fs.existsSync(frontendEnvPath)) {
+    let frontendEnvContent = fs.readFileSync(frontendEnvPath, 'utf8')
+    
+    if (frontendEnvContent.includes('VITE_PRICE_ORACLE_ADDRESS=')) {
+      frontendEnvContent = frontendEnvContent.replace(
+        /VITE_PRICE_ORACLE_ADDRESS=.*/g,
+        `VITE_PRICE_ORACLE_ADDRESS=${oracleAddress}`
+      )
+    } else {
+      frontendEnvContent += `\n# Price Oracle\nVITE_PRICE_ORACLE_ADDRESS=${oracleAddress}\n`
+    }
+    
+    fs.writeFileSync(frontendEnvPath, frontendEnvContent)
+    console.log('✅ 已更新:', frontendEnvPath)
+  } else {
+    console.log('⚠️  前端 .env 文件不存在，跳过')
+  }
+
+  // 9.5 更新后端 .env
+  const backendEnvPath = path.join(
+    __dirname,
+    '../../backend/services/analytics-service/.env'
+  )
+  
+  if (fs.existsSync(backendEnvPath)) {
+    let backendEnvContent = fs.readFileSync(backendEnvPath, 'utf8')
+    
+    if (backendEnvContent.includes('PRICE_ORACLE_ADDRESS=')) {
+      backendEnvContent = backendEnvContent.replace(
+        /PRICE_ORACLE_ADDRESS=.*/g,
+        `PRICE_ORACLE_ADDRESS=${oracleAddress}`
+      )
+    } else {
+      backendEnvContent += `\n# Price Oracle\nPRICE_ORACLE_ADDRESS=${oracleAddress}\n`
+    }
+    
+    fs.writeFileSync(backendEnvPath, backendEnvContent)
+    console.log('✅ 已更新:', backendEnvPath)
+  } else {
+    console.log('⚠️  后端 .env 文件不存在，跳过')
+  }
+  
   console.log('')
 
   // ============================================
@@ -354,15 +450,20 @@ async function main() {
     console.log(`   ${symbol.padEnd(6)}: ${address}`)
   })
   console.log('')
+  console.log('📝 环境变量已自动更新：')
+  console.log('   ✅ contracts/.env.deployed')
+  console.log('   ✅ frontend/web-app/.env')
+  console.log('   ✅ backend/services/analytics-service/.env')
+  console.log('')
   console.log('📝 下一步：')
-  console.log('   1. 更新后端 .env 文件：')
-  console.log(`      PRICE_ORACLE_ADDRESS=${oracleAddress}`)
+  console.log('   1. 初始化价格追踪（后端）：')
+  console.log('      cd backend/services/analytics-service')
+  console.log('      pnpm run init:prices')
   console.log('')
-  console.log('   2. 更新前端 .env 文件：')
-  console.log(`      VITE_PRICE_ORACLE_ADDRESS=${oracleAddress}`)
-  console.log('')
-  console.log('   3. 测试价格查询：')
+  console.log('   2. 测试价格查询（合约）：')
   console.log('      pnpm hardhat run scripts/test-oracle.ts')
+  console.log('')
+  console.log('   3. 重启前端和后端服务以加载新地址')
   console.log('')
   console.log('💡 提示：')
   console.log('   - 使用 MockChainlinkAggregator.setPrice() 可以更新价格（测试用）')

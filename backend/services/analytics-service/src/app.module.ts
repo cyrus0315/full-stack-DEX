@@ -11,6 +11,7 @@ import { BlockchainListenerModule } from './modules/blockchain-listener/blockcha
 import { HistoryModule } from './modules/history/history.module';
 import { AnalyticsModule } from './modules/analytics/analytics.module';
 import { FarmingModule } from './modules/farming/farming.module';
+import { PriceModule } from './modules/price/price.module';
 
 /**
  * App Module - Analytics Service 主模块
@@ -21,6 +22,7 @@ import { FarmingModule } from './modules/farming/farming.module';
  * - 历史记录查询
  * - 数据分析统计
  * - 区块链事件监听和同步
+ * - 价格预言机
  */
 @Module({
   imports: [
@@ -60,6 +62,7 @@ import { FarmingModule } from './modules/farming/farming.module';
     HistoryModule,                // 历史记录查询
     AnalyticsModule,              // 数据分析统计
     FarmingModule,                // 流动性挖矿
+    PriceModule,                  // 价格预言机
   ],
 })
 export class AppModule {}

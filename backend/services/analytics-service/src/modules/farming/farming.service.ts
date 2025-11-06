@@ -1,4 +1,4 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException, Inject, forwardRef } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
@@ -6,6 +6,7 @@ import { createPublicClient, http, parseAbi, formatUnits } from 'viem';
 import { hardhat } from 'viem/chains';
 import { Farm } from './entities/farm.entity';
 import { UserFarm } from './entities/user-farm.entity';
+import { PriceService } from '../price/price.service';
 import {
   FarmDto,
   FarmsResponseDto,
@@ -68,6 +69,8 @@ export class FarmingService {
     @InjectRepository(UserFarm)
     private readonly userFarmRepository: Repository<UserFarm>,
     private readonly configService: ConfigService,
+    @Inject(forwardRef(() => PriceService))
+    private readonly priceService: PriceService,
   ) {
     const rpcUrl = this.configService.get<string>('BLOCKCHAIN_RPC_URL', 'http://127.0.0.1:8545');
     
@@ -111,13 +114,22 @@ export class FarmingService {
     // 构建响应
     const farmDtos: FarmDto[] = farms.map(farm => this.toFarmDto(farm, totalAllocPoint));
 
+    // 获取 DEX 代币价格
+    let dexPrice = '1.0';
+    try {
+      const dexPriceData = await this.priceService.getTokenPrice(this.dexTokenAddress);
+      dexPrice = dexPriceData.priceUsd;
+    } catch (error) {
+      this.logger.warn('Failed to get DEX token price, using default 1.0');
+    }
+
     const summary: FarmingSummaryDto = {
       totalPools: farms.length,
       activePools: farms.filter(f => f.active).length,
       totalTvl: totalTvl.toString(),
       totalAllocPoint: totalAllocPoint.toString(),
       rewardPerBlock: formatUnits(rewardPerBlock, 18),
-      dexPrice: '1.0', // TODO: 从价格预言机获取
+      dexPrice,
       currentBlock: currentBlock.toString(),
     };
 
@@ -341,9 +353,43 @@ export class FarmingService {
     farm.apy = apy.toFixed(2);
     farm.dailyReward = formatUnits(dailyReward, 18);
     
-    // TVL 计算（简化：假设 LP Token 价格为 1）
-    farm.tvl = farm.totalStaked;
-    farm.totalStakedUsd = farm.totalStaked;
+    // 计算 LP Token 的实际 USD 价值
+    try {
+      const [reserves, lpTotalSupply] = await Promise.all([
+        this.publicClient.readContract({
+          address: lpTokenAddress,
+          abi: this.pairAbi,
+          functionName: 'getReserves',
+        }),
+        this.publicClient.readContract({
+          address: lpTokenAddress,
+          abi: this.pairAbi,
+          functionName: 'totalSupply',
+        }),
+      ]);
+
+      const reserve0 = formatUnits(reserves[0], 18);
+      const reserve1 = formatUnits(reserves[1], 18);
+      const totalSupplyFormatted = formatUnits(lpTotalSupply, 18);
+
+      // 使用 PriceService 计算 LP Token USD 价值
+      const tvlUsd = await this.priceService.calculateLpTokenUsdValue(
+        lpTokenAddress.toLowerCase(),
+        farm.totalStaked,
+        reserve0,
+        reserve1,
+        totalSupplyFormatted,
+        token0Address.toLowerCase(),
+        token1Address.toLowerCase(),
+      );
+
+      farm.tvl = tvlUsd;
+      farm.totalStakedUsd = tvlUsd;
+    } catch (error) {
+      this.logger.warn(`Failed to calculate USD value for pool ${poolId}, using token amount`);
+      farm.tvl = farm.totalStaked;
+      farm.totalStakedUsd = farm.totalStaked;
+    }
 
     await this.farmRepository.save(farm);
     
@@ -443,8 +489,55 @@ export class FarmingService {
     userFarm.pendingReward = formatUnits(pendingReward, 18);
     userFarm.shareOfPool = shareOfPool;
     
-    // 简化：假设 LP Token 价格为 1
-    userFarm.stakedUsd = userFarm.stakedAmount;
+    // 计算用户质押的实际 USD 价值
+    try {
+      const lpTokenAddress = farm?.lpTokenAddress;
+      if (lpTokenAddress) {
+        const [reserves, lpTotalSupply, token0Address, token1Address] = await Promise.all([
+          this.publicClient.readContract({
+            address: lpTokenAddress as `0x${string}`,
+            abi: this.pairAbi,
+            functionName: 'getReserves',
+          }),
+          this.publicClient.readContract({
+            address: lpTokenAddress as `0x${string}`,
+            abi: this.pairAbi,
+            functionName: 'totalSupply',
+          }),
+          this.publicClient.readContract({
+            address: lpTokenAddress as `0x${string}`,
+            abi: this.pairAbi,
+            functionName: 'token0',
+          }),
+          this.publicClient.readContract({
+            address: lpTokenAddress as `0x${string}`,
+            abi: this.pairAbi,
+            functionName: 'token1',
+          }),
+        ]);
+
+        const reserve0 = formatUnits(reserves[0], 18);
+        const reserve1 = formatUnits(reserves[1], 18);
+        const totalSupplyFormatted = formatUnits(lpTotalSupply, 18);
+
+        const stakedUsd = await this.priceService.calculateLpTokenUsdValue(
+          lpTokenAddress,
+          userFarm.stakedAmount,
+          reserve0,
+          reserve1,
+          totalSupplyFormatted,
+          token0Address.toLowerCase(),
+          token1Address.toLowerCase(),
+        );
+
+        userFarm.stakedUsd = stakedUsd;
+      } else {
+        userFarm.stakedUsd = userFarm.stakedAmount;
+      }
+    } catch (error) {
+      this.logger.warn(`Failed to calculate USD value for user stake`);
+      userFarm.stakedUsd = userFarm.stakedAmount;
+    }
 
     await this.userFarmRepository.save(userFarm);
     

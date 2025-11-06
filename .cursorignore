@@ -1,0 +1,20 @@
+# Cursor AI 忽略配置
+# 指定哪些文件/目录不被 Cursor 索引和分析
+
+# Node modules
+node_modules/
+
+# Build outputs
+dist/ß
+
+# Logs
+*.log
+logs/
+
+# 但是保留这些重要的配置文件（不忽略）
+# 使用 ! 表示例外
+!.env.deployed
+!contracts/.env.deployed
+!.env.example
+!.env
+

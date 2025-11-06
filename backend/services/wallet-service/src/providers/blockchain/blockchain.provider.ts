@@ -9,7 +9,7 @@ import {
   PublicClient,
   parseEther,
 } from 'viem';
-import { mainnet, sepolia } from 'viem/chains';
+import { localhost } from 'viem/chains';
 
 @Injectable()
 export class BlockchainProvider implements OnModuleInit {
@@ -27,28 +27,32 @@ export class BlockchainProvider implements OnModuleInit {
    * 初始化区块链客户端
    */
   private initializeClients() {
-    const network = this.configService.get('blockchain.network');
     const rpcUrl = this.configService.get('blockchain.rpcUrl');
     const wsUrl = this.configService.get('blockchain.wsUrl');
 
-    // 选择链
-    const chain = network === 'mainnet' ? mainnet : sepolia;
+    this.logger.log(`Initializing blockchain clients...`);
+    this.logger.log(`RPC URL: ${rpcUrl}`);
 
     // HTTP 客户端（用于查询）
     this.publicClient = createPublicClient({
-      chain,
+      chain: localhost,
       transport: http(rpcUrl),
     });
 
     // WebSocket 客户端（用于事件监听）
     if (wsUrl) {
-      this.wsClient = createPublicClient({
-        chain,
-        transport: webSocket(wsUrl),
-      });
+      try {
+        this.wsClient = createPublicClient({
+          chain: localhost,
+          transport: webSocket(wsUrl),
+        });
+        this.logger.log('WebSocket client initialized');
+      } catch (error) {
+        this.logger.warn('WebSocket client initialization failed', error);
+      }
     }
 
-    this.logger.log(`✅ Blockchain Provider 初始化成功 (${network})`);
+    this.logger.log('Blockchain clients initialized successfully');
   }
 
   /**

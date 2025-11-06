@@ -200,7 +200,7 @@ DEPLOYER_ADDRESS=${deployer.address}
   }
 
   // 更新 Trading Service 配置
-  const tradingEnvPath = path.join(__dirname, "../../backend/services/trading-service/.env");
+  const tradingEnvPath = path.join(__dirname, "../../backend/services/analytics-service/.env");
   if (updateEnvFile(tradingEnvPath, {
     'DEX_FACTORY_ADDRESS': factoryAddress,
     'DEX_ROUTER_ADDRESS': routerAddress,
