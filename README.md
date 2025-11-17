@@ -2,10 +2,14 @@
 
 > 基于 UniswapV2 的企业级 DEX 实现，采用现代化技术栈，完全开源。
 
+[English](./README_EN.md) | 简体中文
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-18-61DAFB.svg)](https://reactjs.org/)
 [![NestJS](https://img.shields.io/badge/NestJS-10-E0234E.svg)](https://nestjs.com/)
+[![Solidity](https://img.shields.io/badge/Solidity-0.8.20-363636.svg)](https://soliditylang.org/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](docs/CONTRIBUTING.md)
 
 ---
 
@@ -16,6 +20,7 @@
 - ✅ **Swap** - 代币兑换（基于 AMM 算法）
 - ✅ **Liquidity** - 流动性添加/移除
 - ✅ **Pool** - 流动性池管理
+- ✅ **Farms** - 流动性挖矿
 - ✅ **History** - 完整的交易历史记录
 - ✅ **Analytics** - 数据分析和统计
 - ✅ **Real-time** - WebSocket 实时数据推送
@@ -26,6 +31,40 @@
 - **现代化架构** - 前端直接调用合约，后端提供只读数据服务
 - **完整的数据分析** - 历史记录、统计数据、实时监控
 - **生产级代码** - 经过多次重构和优化，代码清晰可维护
+
+---
+
+## 📸 项目截图
+
+### 💱 Swap - 代币交易
+<img src="./docs/images/screenshots/swap.jpg" alt="Swap Interface" width="800">
+
+*即时兑换任意 ERC20 代币，支持滑点保护*
+
+### 💧 Pool - 流动性池
+<img src="./docs/images/screenshots/pool-list.jpg" alt="Pool List" width="800">
+
+*查看所有交易对，TVL 和 APY 一目了然*
+
+### ➕ Add Liquidity - 添加流动性
+<img src="./docs/images/screenshots/add-liquidity.jpg" alt="Add Liquidity" width="800">
+
+*成为流动性提供者，赚取交易手续费*
+
+### 🌾 Farms - 流动性挖矿
+<img src="./docs/images/screenshots/farms.jpg" alt="Farms" width="800">
+
+*质押 LP Token，获得额外奖励*
+
+### 📊 Pool Detail - 池子详情
+<img src="./docs/images/screenshots/pool-detail.jpg" alt="Pool Detail" width="800">
+
+*详细的池子信息和质押界面*
+
+### 📜 History - 交易历史
+<img src="./docs/images/screenshots/history.jpg" alt="Transaction History" width="800">
+
+*完整的 Swap 和流动性操作记录*
 
 ---
 
