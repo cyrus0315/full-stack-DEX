@@ -1,0 +1,564 @@
+"""
+DEX Subgraph Schema
+基于 Uniswap V2，扩展支持流动性挖矿
+"""
+
+# ========================================
+# Core Entities (Uniswap V2)
+# ========================================
+
+"""
+DEX Factory 合约
+"""
+type Factory @entity {
+  "Factory 合约地址"
+  id: ID!
+  
+  "交易对数量"
+  pairCount: Int!
+  
+  "总交易量（USD）"
+  totalVolumeUSD: BigDecimal!
+  
+  "总交易量（ETH）"
+  totalVolumeETH: BigDecimal!
+  
+  "未跟踪的交易量（USD）"
+  untrackedVolumeUSD: BigDecimal!
+  
+  "总流动性（USD）"
+  totalLiquidityUSD: BigDecimal!
+  
+  "总流动性（ETH）"
+  totalLiquidityETH: BigDecimal!
+  
+  "总交易笔数"
+  txCount: BigInt!
+  
+  "最后更新时间"
+  updatedAt: BigInt!
+}
+
+"""
+代币实体
+"""
+type Token @entity {
+  "代币合约地址"
+  id: ID!
+  
+  "代币符号"
+  symbol: String!
+  
+  "代币名称"
+  name: String!
+  
+  "小数位数"
+  decimals: BigInt!
+  
+  "总供应量"
+  totalSupply: BigInt!
+  
+  "交易量（代币数量）"
+  tradeVolume: BigDecimal!
+  
+  "交易量（USD）"
+  tradeVolumeUSD: BigDecimal!
+  
+  "未跟踪交易量（USD）"
+  untrackedVolumeUSD: BigDecimal!
+  
+  "总交易笔数"
+  txCount: BigInt!
+  
+  "总流动性"
+  totalLiquidity: BigDecimal!
+  
+  "衍生 ETH 价格（用于计算 USD）"
+  derivedETH: BigDecimal
+}
+
+"""
+交易对（流动性池）
+"""
+type Pair @entity {
+  "交易对合约地址"
+  id: ID!
+  
+  "Token0"
+  token0: Token!
+  
+  "Token1"
+  token1: Token!
+  
+  "Token0 储备量"
+  reserve0: BigDecimal!
+  
+  "Token1 储备量"
+  reserve1: BigDecimal!
+  
+  "总供应量（LP Token）"
+  totalSupply: BigDecimal!
+  
+  "储备量（ETH）"
+  reserveETH: BigDecimal!
+  
+  "储备量（USD）"
+  reserveUSD: BigDecimal!
+  
+  "未跟踪储备量（USD）"
+  untrackedVolumeUSD: BigDecimal!
+  
+  "Token0 价格"
+  token0Price: BigDecimal!
+  
+  "Token1 价格"
+  token1Price: BigDecimal!
+  
+  "交易量（Token0）"
+  volumeToken0: BigDecimal!
+  
+  "交易量（Token1）"
+  volumeToken1: BigDecimal!
+  
+  "交易量（USD）"
+  volumeUSD: BigDecimal!
+  
+  "交易笔数"
+  txCount: BigInt!
+  
+  "创建时间"
+  createdAtTimestamp: BigInt!
+  
+  "创建区块号"
+  createdAtBlockNumber: BigInt!
+  
+  "流动性提供者代币铸造历史"
+  mints: [Mint!]! @derivedFrom(field: "pair")
+  
+  "流动性提供者代币销毁历史"
+  burns: [Burn!]! @derivedFrom(field: "pair")
+  
+  "交易历史"
+  swaps: [Swap!]! @derivedFrom(field: "pair")
+  
+  "最后更新时间"
+  updatedAt: BigInt!
+}
+
+"""
+交易事件
+"""
+type Swap @entity {
+  "交易 ID：交易哈希-日志索引"
+  id: ID!
+  
+  "所属交易"
+  transaction: Transaction!
+  
+  "交易对"
+  pair: Pair!
+  
+  "时间戳"
+  timestamp: BigInt!
+  
+  "发送者"
+  sender: Bytes!
+  
+  "接收者"
+  to: Bytes!
+  
+  "输入 Token0 数量"
+  amount0In: BigDecimal!
+  
+  "输入 Token1 数量"
+  amount1In: BigDecimal!
+  
+  "输出 Token0 数量"
+  amount0Out: BigDecimal!
+  
+  "输出 Token1 数量"
+  amount1Out: BigDecimal!
+  
+  "交易量（USD）"
+  amountUSD: BigDecimal!
+  
+  "日志索引"
+  logIndex: BigInt
+}
+
+"""
+添加流动性事件
+"""
+type Mint @entity {
+  "铸造 ID：交易哈希-日志索引"
+  id: ID!
+  
+  "所属交易"
+  transaction: Transaction!
+  
+  "交易对"
+  pair: Pair!
+  
+  "时间戳"
+  timestamp: BigInt!
+  
+  "发送者"
+  sender: Bytes!
+  
+  "接收者"
+  to: Bytes!
+  
+  "流动性数量"
+  liquidity: BigDecimal!
+  
+  "Token0 数量"
+  amount0: BigDecimal!
+  
+  "Token1 数量"
+  amount1: BigDecimal!
+  
+  "流动性价值（USD）"
+  amountUSD: BigDecimal!
+  
+  "手续费接收者"
+  feeTo: Bytes
+  
+  "手续费流动性"
+  feeLiquidity: BigDecimal
+  
+  "日志索引"
+  logIndex: BigInt
+}
+
+"""
+移除流动性事件
+"""
+type Burn @entity {
+  "销毁 ID：交易哈希-日志索引"
+  id: ID!
+  
+  "所属交易"
+  transaction: Transaction!
+  
+  "交易对"
+  pair: Pair!
+  
+  "时间戳"
+  timestamp: BigInt!
+  
+  "发送者"
+  sender: Bytes!
+  
+  "接收者"
+  to: Bytes!
+  
+  "流动性数量"
+  liquidity: BigDecimal!
+  
+  "Token0 数量"
+  amount0: BigDecimal!
+  
+  "Token1 数量"
+  amount1: BigDecimal!
+  
+  "流动性价值（USD）"
+  amountUSD: BigDecimal!
+  
+  "需要完成标志"
+  needsComplete: Boolean!
+  
+  "手续费接收者"
+  feeTo: Bytes
+  
+  "手续费流动性"
+  feeLiquidity: BigDecimal
+  
+  "日志索引"
+  logIndex: BigInt
+}
+
+"""
+交易实体（区块链交易）
+"""
+type Transaction @entity {
+  "交易哈希"
+  id: ID!
+  
+  "区块号"
+  blockNumber: BigInt!
+  
+  "时间戳"
+  timestamp: BigInt!
+  
+  "包含的铸造事件"
+  mints: [Mint!]! @derivedFrom(field: "transaction")
+  
+  "包含的销毁事件"
+  burns: [Burn!]! @derivedFrom(field: "transaction")
+  
+  "包含的交易事件"
+  swaps: [Swap!]! @derivedFrom(field: "transaction")
+}
+
+# ========================================
+# Extended Entities (Farming)
+# ========================================
+
+"""
+流动性挖矿池子
+"""
+type Farm @entity {
+  "池子 ID（Pool ID）"
+  id: ID!
+  
+  "LP Token 地址"
+  lpToken: Bytes!
+  
+  "关联的交易对"
+  pair: Pair
+  
+  "分配点数"
+  allocPoint: BigInt!
+  
+  "最后奖励区块"
+  lastRewardBlock: BigInt!
+  
+  "累积奖励份额"
+  accRewardPerShare: BigInt!
+  
+  "总质押数量"
+  totalStaked: BigDecimal!
+  
+  "总质押价值（USD）"
+  totalStakedUSD: BigDecimal!
+  
+  "APR（年化收益率）"
+  apr: BigDecimal
+  
+  "状态（active/inactive）"
+  status: String!
+  
+  "创建时间"
+  createdAtTimestamp: BigInt!
+  
+  "创建区块号"
+  createdAtBlockNumber: BigInt!
+  
+  "质押用户列表"
+  users: [UserStake!]! @derivedFrom(field: "farm")
+  
+  "质押历史"
+  deposits: [Deposit!]! @derivedFrom(field: "farm")
+  
+  "取回历史"
+  withdrawals: [Withdrawal!]! @derivedFrom(field: "farm")
+  
+  "最后更新时间"
+  updatedAt: BigInt!
+}
+
+"""
+用户质押信息
+"""
+type UserStake @entity {
+  "用户质押 ID：用户地址-池子ID"
+  id: ID!
+  
+  "用户地址"
+  user: Bytes!
+  
+  "农场"
+  farm: Farm!
+  
+  "质押数量"
+  amount: BigDecimal!
+  
+  "质押价值（USD）"
+  amountUSD: BigDecimal!
+  
+  "奖励债务"
+  rewardDebt: BigInt!
+  
+  "待领取奖励"
+  pendingReward: BigDecimal!
+  
+  "已领取总奖励"
+  totalEarned: BigDecimal!
+  
+  "已领取总奖励（USD）"
+  totalEarnedUSD: BigDecimal!
+  
+  "最后质押时间"
+  lastDepositTimestamp: BigInt!
+  
+  "最后提取时间"
+  lastWithdrawTimestamp: BigInt!
+  
+  "最后更新时间"
+  updatedAt: BigInt!
+}
+
+"""
+质押事件
+"""
+type Deposit @entity {
+  "存款 ID：交易哈希-日志索引"
+  id: ID!
+  
+  "用户地址"
+  user: Bytes!
+  
+  "农场"
+  farm: Farm!
+  
+  "质押数量"
+  amount: BigDecimal!
+  
+  "时间戳"
+  timestamp: BigInt!
+  
+  "区块号"
+  blockNumber: BigInt!
+  
+  "交易哈希"
+  transaction: Bytes!
+}
+
+"""
+取回事件
+"""
+type Withdrawal @entity {
+  "取回 ID：交易哈希-日志索引"
+  id: ID!
+  
+  "用户地址"
+  user: Bytes!
+  
+  "农场"
+  farm: Farm!
+  
+  "取回数量"
+  amount: BigDecimal!
+  
+  "时间戳"
+  timestamp: BigInt!
+  
+  "区块号"
+  blockNumber: BigInt!
+  
+  "交易哈希"
+  transaction: Bytes!
+}
+
+"""
+奖励领取事件
+"""
+type RewardPaid @entity {
+  "奖励 ID：交易哈希-日志索引"
+  id: ID!
+  
+  "用户地址"
+  user: Bytes!
+  
+  "农场"
+  farm: Farm!
+  
+  "奖励数量"
+  amount: BigDecimal!
+  
+  "时间戳"
+  timestamp: BigInt!
+  
+  "区块号"
+  blockNumber: BigInt!
+  
+  "交易哈希"
+  transaction: Bytes!
+}
+
+# ========================================
+# Price Oracle Entities
+# ========================================
+
+"""
+代币价格（来自 Price Oracle）
+"""
+type TokenPrice @entity {
+  "代币地址"
+  id: ID!
+  
+  "代币"
+  token: Token!
+  
+  "USD 价格"
+  priceUSD: BigDecimal!
+  
+  "最后更新时间"
+  updatedAt: BigInt!
+  
+  "Price Feed 地址"
+  priceFeed: Bytes
+}
+
+# ========================================
+# Aggregated Stats
+# ========================================
+
+"""
+每日统计数据
+"""
+type DayData @entity {
+  "日期 ID：时间戳/86400"
+  id: ID!
+  
+  "日期（UNIX 时间戳）"
+  date: Int!
+  
+  "每日交易量（USD）"
+  dailyVolumeUSD: BigDecimal!
+  
+  "每日交易量（ETH）"
+  dailyVolumeETH: BigDecimal!
+  
+  "每日交易笔数"
+  dailyTxns: BigInt!
+  
+  "总流动性（USD）"
+  totalLiquidityUSD: BigDecimal!
+  
+  "总流动性（ETH）"
+  totalLiquidityETH: BigDecimal!
+}
+
+"""
+交易对每日数据
+"""
+type PairDayData @entity {
+  "ID：交易对地址-日期"
+  id: ID!
+  
+  "日期（UNIX 时间戳）"
+  date: Int!
+  
+  "交易对"
+  pair: Pair!
+  
+  "每日交易量（Token0）"
+  dailyVolumeToken0: BigDecimal!
+  
+  "每日交易量（Token1）"
+  dailyVolumeToken1: BigDecimal!
+  
+  "每日交易量（USD）"
+  dailyVolumeUSD: BigDecimal!
+  
+  "每日交易笔数"
+  dailyTxns: BigInt!
+  
+  "储备量（USD）"
+  reserveUSD: BigDecimal!
+  
+  "总供应量"
+  totalSupply: BigDecimal!
+}
+

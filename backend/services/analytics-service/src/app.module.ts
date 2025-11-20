@@ -12,6 +12,7 @@ import { HistoryModule } from './modules/history/history.module';
 import { AnalyticsModule } from './modules/analytics/analytics.module';
 import { FarmingModule } from './modules/farming/farming.module';
 import { PriceModule } from './modules/price/price.module';
+import { TheGraphModule } from './modules/thegraph/thegraph.module';
 
 /**
  * App Module - Analytics Service 主模块
@@ -63,6 +64,7 @@ import { PriceModule } from './modules/price/price.module';
     AnalyticsModule,              // 数据分析统计
     FarmingModule,                // 流动性挖矿
     PriceModule,                  // 价格预言机
+    TheGraphModule,               // The Graph 数据索引
   ],
 })
 export class AppModule {}
