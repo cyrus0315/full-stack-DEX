@@ -4,8 +4,8 @@
 
 将 The Graph 集成到 DEX 项目中，优化数据查询性能，降低后端负载。
 
-**完成时间：** 2025-11-19  
-**状态：** ✅ Subgraph 开发完成，✅ 后端集成完成
+**完成时间：** 2025-11-20  
+**状态：** ✅ Subgraph 开发完成，✅ 后端集成完成，⏳ 本地测试待完成
 
 ---
 
@@ -521,6 +521,81 @@ docker logs graph-node
 ---
 
 **状态：** 🟡 开发中（Subgraph + 后端完成，前端待集成）  
-**完成度：** 70%  
-**最后更新：** 2025-11-19
+**完成度：** 75%  
+**最后更新：** 2025-11-20
+
+---
+
+## 📈 最新进展（2025-11-20）
+
+### ✅ 已完成
+
+1. **Subgraph 完整实现**
+   - ✅ 完整的 Schema 定义（Uniswap V2 + Farming）
+   - ✅ Factory Mapping（handlePairCreated）
+   - ✅ Pair Mapping（handleSwap, handleMint, handleBurn, handleSync）
+   - ✅ MasterChef Mapping（handleDeposit, handleWithdraw, handlePoolAdded）
+   - ✅ 辅助函数和常量配置
+   - ✅ ABI 文件准备（DEXFactory, DEXPair, MasterChef, ERC20）
+   - ✅ Subgraph README 文档
+
+2. **后端完整集成**
+   - ✅ TheGraph Module 创建
+   - ✅ TheGraph Service 实现（GraphQL 客户端）
+   - ✅ TheGraph Controller（10+ REST API 端点）
+   - ✅ 环境变量配置（SUBGRAPH_URL, ENABLE_THE_GRAPH）
+   - ✅ 依赖安装（graphql-request, graphql）
+   - ✅ 注册到 AppModule
+   - ✅ Lint 检查通过（0 错误）
+
+3. **文档**
+   - ✅ The Graph 集成文档（THE_GRAPH_INTEGRATION.md）
+   - ✅ The Graph 新手详解（THE_GRAPH_EXPLAINED.md）
+   - ✅ Subgraph README（subgraph/README.md）
+
+### ⏳ 待完成
+
+1. **本地测试**（Day 1 剩余）
+   - [ ] 启动 Graph Node（Docker）
+   - [ ] 部署 Subgraph 到本地
+   - [ ] 验证数据同步
+   - [ ] 测试 GraphQL 查询
+   - [ ] 测试后端 API 端点
+
+2. **生产部署**（Day 2）
+   - [ ] 注册 The Graph 托管服务账号
+   - [ ] 部署 Subgraph 到托管服务
+   - [ ] 配置生产环境 SUBGRAPH_URL
+   - [ ] 生成测试数据并验证
+
+3. **前端集成**（Day 3）
+   - [ ] 安装 Apollo Client
+   - [ ] 配置 GraphQL Provider
+   - [ ] 实现 GraphQL 查询 Hooks
+   - [ ] Pool 页面集成
+   - [ ] History 页面集成
+   - [ ] Farms 页面集成
+
+### 📊 工作量统计
+
+- **Subgraph 代码**：~1,500 行（schema + mappings + utils）
+- **后端代码**：~1,000 行（service + controller + module）
+- **文档**：~2,000 行（3 个文档文件）
+- **总计**：~4,500 行代码和文档
+
+### 🎯 下一步
+
+运行本地测试脚本验证集成：
+```bash
+# 1. 启动 Graph Node
+cd ~/graph-node/docker && docker-compose up
+
+# 2. 部署 Subgraph
+cd /Users/h15/Desktop/dex/subgraph
+pnpm codegen && pnpm build
+pnpm create-local && pnpm deploy-local
+
+# 3. 测试 API
+bash /Users/h15/Desktop/dex/scripts/test-thegraph-integration.sh
+```
 

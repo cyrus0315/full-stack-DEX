@@ -101,8 +101,9 @@
 - [一期实现方案](./08-roadmap/phase1-implementation.md) - 实现细节
 - [二期规划](./08-roadmap/phase2-planning.md) - 二期功能规划 (1,257 行)
 - [执行摘要](./08-roadmap/executive-summary.md) - 项目概览
+- [更新路线图](./UPDATED_ROADMAP.md) - 最新开发计划 ✨
 
-**当前状态**: 一期 85% 完成，二期规划中
+**当前状态**: Phase 6 完成，Phase 6.5 开发中（75% 完成）
 
 ---
 
@@ -149,6 +150,7 @@
 - [ARCHITECTURE.md](../ARCHITECTURE.md) - 系统架构总览 (853 行)
 - [GETTING_STARTED.md](../GETTING_STARTED.md) - 快速开始
 - [QUICK_REFERENCE.md](../QUICK_REFERENCE.md) - 常用命令速查
+- [THE_GRAPH_EXPLAINED.md](./THE_GRAPH_EXPLAINED.md) - The Graph 新手详解 ✨ (1,417 行)
 
 ### 代码仓库
 
@@ -183,9 +185,23 @@ API 接口: 52 个
 ## 📝 文档维护
 
 - **创建日期**: 2025-10-29
-- **最后更新**: 2025-10-29
+- **最后更新**: 2025-11-20
 - **维护者**: DEX Team
-- **文档结构**: v1.0
+- **文档结构**: v1.1
+
+### 🆕 最新更新（2025-11-20）
+
+#### Phase 6.5: The Graph 集成
+- ✅ [The Graph 新手详解](./THE_GRAPH_EXPLAINED.md) - 从零开始理解 The Graph (1,417 行)
+- ✅ [The Graph 集成文档](./phases/phase6.5/THE_GRAPH_INTEGRATION.md) - 完整集成指南 (600+ 行)
+- ✅ [Subgraph README](../subgraph/README.md) - Subgraph 使用文档 (345 行)
+
+**完成状态**: 75%（Subgraph + 后端完成，前端待集成）
+
+#### Phase 6: 价格预言机 ✅
+- ✅ [合约完成文档](./phases/phase6/CONTRACTS_COMPLETED.md)
+- ✅ [后端集成文档](./phases/phase6/BACKEND_INTEGRATION.md)
+- ✅ [生产部署指南](./phases/phase6/PRODUCTION_DEPLOYMENT.md)
 
 ---
 
