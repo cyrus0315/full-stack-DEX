@@ -13,6 +13,7 @@ import { AnalyticsModule } from './modules/analytics/analytics.module';
 import { FarmingModule } from './modules/farming/farming.module';
 import { PriceModule } from './modules/price/price.module';
 import { TheGraphModule } from './modules/thegraph/thegraph.module';
+import { LimitOrderModule } from './modules/limit-order/limit-order.module';
 
 /**
  * App Module - Analytics Service 主模块
@@ -65,6 +66,7 @@ import { TheGraphModule } from './modules/thegraph/thegraph.module';
     FarmingModule,                // 流动性挖矿
     PriceModule,                  // 价格预言机
     TheGraphModule,               // The Graph 数据索引
+    LimitOrderModule,             // 限价单
   ],
 })
 export class AppModule {}

@@ -1,0 +1,45 @@
+.trading-page {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.trading-header {
+  margin-bottom: 24px;
+}
+
+.trading-card {
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.trading-card .ant-tabs-nav {
+  margin-bottom: 24px;
+}
+
+.trading-card .ant-tabs-tab {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.limit-order-container {
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* 移除 SwapPage 自身的 wrapper，使其完全嵌入 */
+.trading-card .swap-page {
+  padding: 0;
+  margin: 0;
+}
+
+.trading-card .swap-page-header {
+  display: none; /* 隐藏原 Swap 页面的头部 */
+}
+
+.trading-card .swap-card-upgraded {
+  box-shadow: none;
+  border: none;
+}
+

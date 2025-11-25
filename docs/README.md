@@ -151,6 +151,7 @@
 - [GETTING_STARTED.md](../GETTING_STARTED.md) - 快速开始
 - [QUICK_REFERENCE.md](../QUICK_REFERENCE.md) - 常用命令速查
 - [THE_GRAPH_EXPLAINED.md](./THE_GRAPH_EXPLAINED.md) - The Graph 新手详解 ✨ (1,417 行)
+- [LIMIT_ORDER_EXPLAINED.md](./LIMIT_ORDER_EXPLAINED.md) - 限价单详解 ✨ **新增** (1,200+ 行)
 
 ### 代码仓库
 
